@@ -1,3 +1,4 @@
+import json
 import csv
 
 mileages = []
@@ -80,7 +81,6 @@ for i in range(iterations):
 print(theta0)
 print(theta1)
 
-import json
 
 model = {
     "theta0": theta0,

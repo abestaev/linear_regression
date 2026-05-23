@@ -1,4 +1,5 @@
 import json
+import math
 
 theta0 = 0
 theta1 = 0
@@ -24,9 +25,10 @@ try:
 
     if max_km != min_km:
         mileage = (mileage - min_km) / (max_km - min_km)
-        
+
     price = theta0 + theta1 * mileage
-    print(price)
+    price = max(0, price)
+    print(math.ceil(price))
 
 except ValueError:
     print("Invalid mileage")
