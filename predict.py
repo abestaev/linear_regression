@@ -1,7 +1,22 @@
+import json
+
 theta0 = 0
 theta1 = 0
 
-mileage = float(input("Enter mileage: "))
-price = theta0 + theta1 * mileage
+try:
+    with open("model.json", "r") as file:
+        model = json.load(file)
+    if "theta0" in model and "theta1" in model:
+        theta0 = model["theta0"]
+        theta1 = model["theta1"]
 
-print(price)
+except FileNotFoundError:
+    pass
+
+try:
+    mileage = float(input("Enter mileage: "))
+    price = theta0 + theta1 * mileage
+    print(price)
+
+except ValueError:
+    print("Invalid mileage")
