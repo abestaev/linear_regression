@@ -48,6 +48,10 @@ m = len(mileages)
 min_km = min(mileages)
 max_km = max(mileages)
 
+if max_km == min_km:
+    print("Error: all mileages are identical")
+    exit()
+
 normalized_mileages = []
 
 for mileage in mileages:
