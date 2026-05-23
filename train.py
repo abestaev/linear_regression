@@ -41,20 +41,30 @@ if len(mileages) == 0:
 
 theta0 = 0
 theta1 = 0
-learning_rate = 0.0000000001
+learning_rate = 1
 iterations = 1000
 m = len(mileages)
+
+min_km = min(mileages)
+max_km = max(mileages)
+
+normalized_mileages = []
+
+for mileage in mileages:
+    km_normalized = (mileage - min_km) / (max_km - min_km)
+    normalized_mileages.append(km_normalized)
+
 
 for i in range(iterations):
     sum_theta0 = 0
     sum_theta1 = 0
 
     for j in range(m):
-        prediction = theta0 + theta1 * mileages[j]
+        prediction = theta0 + theta1 * normalized_mileages[j]
         error = prediction - prices[j]
 
         sum_theta0 += error
-        sum_theta1 += error * mileages[j]
+        sum_theta1 += error * normalized_mileages[j]
     
     tmp_theta0 = learning_rate * (1 / m) * sum_theta0
     tmp_theta1 = learning_rate * (1 / m) * sum_theta1
@@ -71,6 +81,8 @@ import json
 model = {
     "theta0": theta0,
     "theta1": theta1,
+    "min_km": min_km,
+    "max_km": max_km
 }
 
 with open("model.json", "w") as file:
